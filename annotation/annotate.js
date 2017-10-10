@@ -1,10 +1,12 @@
 video = document.getElementById("a_classic");
 caps = document.getElementById("lyrics");
 
-video.addEventListener
-   ("timeupdate", function()
+video.addEventListener("timeupdate", function()
 {
-    if (video.currentTime >= 9.5 && video.currentTime < 13.5)
+    if (video.currentTime < 9.5)
+        caps.innerHTML = "<p>♪ [instrumental]</p>";
+    
+    else if (video.currentTime >= 9.5 && video.currentTime < 13.5)
 	   caps.innerHTML = "<p>Children have You ever met the Bogeyman before</p>";
 					   
     else if (video.currentTime >= 13.5 && video.currentTime < 17.5)
