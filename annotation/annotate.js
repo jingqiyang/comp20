@@ -8,10 +8,10 @@ video.addEventListener
 	   caps.innerHTML = "<p>Children have You ever met the Bogeyman before</p>";
 					   
     else if (video.currentTime >= 13.5 && video.currentTime < 17.5)
-	   caps.innerHTML = "<p>No, of course You haven't for You're much too good, I'm sure</p>";
+    caps.innerHTML = "<p>No, of course You haven't for You're much too good, I'm sure;</p>";
     
     else if (video.currentTime >= 17.5 && video.currentTime < 21.5)
-        caps.innerHTML = "<p>Don't You be afraid of him if he should visit You</p>";
+        caps.innerHTML = "<p>Don't You be afraid of him if he should visit You,</p>";
     
     else if (video.currentTime >= 21.5 && video.currentTime < 25.5)
         caps.innerHTML = "<p>He's a great big coward, so I'll tell You what to do</p>";
@@ -20,13 +20,13 @@ video.addEventListener
         caps.innerHTML = "<p>Hush, hush, hush, here comes the Bogeyman</p>";
     
     else if (video.currentTime >= 29 && video.currentTime < 33.5)
-        caps.innerHTML = "<p>Don't let him come too close to You, he'll catch you if he can</p>";
+        caps.innerHTML = "<p>Don't let him come too close to You, he'll catch you if he can.</p>";
     
    else if (video.currentTime >= 33.5 && video.currentTime < 37.5)
         caps.innerHTML = "<p>Just pretend that you're a crocodile</p>";
     
     else if (video.currentTime >= 37.5 && video.currentTime < 41.5)
-        caps.innerHTML = "<p>And you will find that Bogeyman will run away a mile</p>";
+        caps.innerHTML = "<p>And you will find that Bogeyman will run away a mile.</p>";
    
     else if (video.currentTime >= 41.5 && video.currentTime < 45.5)
         caps.innerHTML = "<p>Say Shoo shoo and stick him with a pin</p>";
@@ -78,21 +78,43 @@ video.addEventListener
     
     else if (video.currentTime >= 108 && video.currentTime < 111.5)
     caps.innerHTML = "<p>Uncle Henry's very kindly told you what to do</p>";
+
+    else if (video.currentTime >= 111.5 && video.currentTime < 115.5)
+    caps.innerHTML = "<p>Hush, hush, hush, here comes the Bogeyman</p>";
+    
+    else if (video.currentTime >= 115.5 && video.currentTime < 119.5)
+    caps.innerHTML = "<p>Don't let him come too close to you, He'll catch you if he can.</p>";
+    
+    else if (video.currentTime >= 119.5 && video.currentTime < 123)
+    caps.innerHTML = "<p>Just pretend your teddy bear's a dog</p>";
+    
+    else if (video.currentTime >= 123 && video.currentTime < 126.5)
+    caps.innerHTML = "<p>Then shout out, 'Fetch him, Teddy!' and he'll hop off like a frog.</p>";
+    
+    else if (video.currentTime >= 126.5 && video.currentTime < 135)
+        caps.innerHTML = "<p>♪ [instrumental]</p>";
+    
+    else if (video.currentTime >= 135 && video.currentTime < 139)
+    caps.innerHTML = "<p>Say Meoow, pretend that you're a cat</p>";
+    
+    else if (video.currentTime >= 139 && video.currentTime < 143)
+    caps.innerHTML = "<p>He'll think you may scratch him that make him fall down flat</p>";
+    
+    else if (video.currentTime >= 143 && video.currentTime < 147)
+    caps.innerHTML = "<p>Just pretend he isn't really there</p>";
+    
+    else if (video.currentTime >= 147 && video.currentTime < 150.5)
+    caps.innerHTML = "<p>You will find that Bogey man will vanish in thin air</p>";
+    
+    else if (video.currentTime >= 150.5 && video.currentTime < 158.5)
+        caps.innerHTML = "<p>♪ [instrumental]</p>";
+  
+    else if (video.currentTime >= 158.5 && video.currentTime < 162.5)
+    caps.innerHTML = "<p>Here's one way to catch him without fail</p>";
+    
+    else if (video.currentTime >= 162.5 && video.currentTime < 166)
+    caps.innerHTML = "<p>Just keep a little salt with you and put it on his tail</p>";
     
     else
         caps.innerHTML = "";
-
-//	   111.5-115.5 Hush, hush, hush, here comes the Bogeyman
-//	   115.5-119.5 Don't let him come too close to you, He'll catch you if he can.
-//	   119.5-123 Just pretend your teddy bear's a dog
-//	   123-126.5 Then shout out, 'Fetch him, Teddy!' and he'll hop off like a frog.
-//
-//	   135-139 Say Meoow, pretend that you're a cat
-//	   139-143 He'll think you may scratch him that make him fall down flat
-//	   143-147 Just pretend he isn't really there
-//	   147-150.5 You will find that Bogey man will vanish in thin air
-//
-//	   159-162.5 Here's one way to catch him without fail
-//	   162.5-166 Just keep a little salt with you and put it on his tail
-
 }, false);
