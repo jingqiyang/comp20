@@ -1,0 +1,7 @@
+@media screen and (min-device-width: 1200px)
+{
+    .garfield {
+        width:399px; height:127px;
+        background:url("garfield.gif") 0 0px;
+    }
+}
