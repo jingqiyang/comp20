@@ -49,22 +49,39 @@ video.addEventListener
     else if (video.currentTime >= 65 && video.currentTime < 68.5)
         caps.innerHTML = "<p>Tell him you've got soldiers in your bed</p>";
     
-    else if (video.currentTime >= 68.5 && video.currentTime < 72)
+    else if (video.currentTime >= 68.5 && video.currentTime < 72.5)
         caps.innerHTML = "<p>For he will never guess that they are only made of lead</p>";
+  
+    else if (video.currentTime >= 72.5 && video.currentTime < 80.5)
+        caps.innerHTML = "<p>♪ [instrumental]</p>";
+    
+    else if (video.currentTime >= 80.5 && video.currentTime < 84.5)
+    caps.innerHTML = "<p>Say Hush hush, he'll think that you're asleep</p>";
+    
+    else if (video.currentTime >= 84.5 && video.currentTime < 88)
+    caps.innerHTML = "<p>If you make a lovely snore away he'll softly creep</p>";
+    
+    else if (video.currentTime >= 88 && video.currentTime < 92)
+    caps.innerHTML = "<p>Sing this tune you children one and all</p>";
+    
+    else if (video.currentTime >= 92 && video.currentTime < 96)
+    caps.innerHTML = "<p>Bogeyman will run away, he'll think it's Henry Hall!</p>";
+    
+    else if (video.currentTime >= 96 && video.currentTime < 100)
+    caps.innerHTML = "<p>When the shadows of the evening creep across the sky</p>";
+    
+    else if (video.currentTime >= 100 && video.currentTime < 104)
+    caps.innerHTML = "<p>And your Mummy comes upstairs to sing a lullaby</p>";
+    
+    else if (video.currentTime >= 104 && video.currentTime < 108)
+    caps.innerHTML = "<p>Tell her that the bogeyman no longer frightens you</p>";
+    
+    else if (video.currentTime >= 108 && video.currentTime < 111.5)
+    caps.innerHTML = "<p>Uncle Henry's very kindly told you what to do</p>";
     
     else
         caps.innerHTML = "";
 
-//	   80.5-84.5 Say Hush hush, he'll think that you're asleep
-//	   84.5-88 If you make a lovely snore away he'll softly creep
-//	   88-92 Sing this tune you children one and all
-//	   92-96 Bogeyman will run away, he'll think it's Henry Hall!
-//
-//	   96-100 When the shadows of the evening creep across the sky
-//	   100-104 And your Mummy comes upstairs to sing a lullaby
-//	   104-108 Tell her that the bogeyman no longer frightens you
-//	   108-111.5 Uncle Henry's very kindly told you what to do
-//
 //	   111.5-115.5 Hush, hush, hush, here comes the Bogeyman
 //	   115.5-119.5 Don't let him come too close to you, He'll catch you if he can.
 //	   119.5-123 Just pretend your teddy bear's a dog
