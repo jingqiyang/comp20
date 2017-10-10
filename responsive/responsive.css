@@ -1,7 +1,13 @@
-@media screen and (min-device-width: 1200px)
-{
+@media screen and (min-width: 1201px) {
     .garfield {
         width:399px; height:127px;
         background:url("garfield.gif") 0 0px;
+    }
+}
+
+@media screen and (min-width: 1101px) and (max-width: 1200px) {
+    .garfield {
+        width:194px; height:127px;
+        background:url("garfield.gif") -406px 0px;
     }
 }
