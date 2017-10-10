@@ -3,11 +3,21 @@ caps = document.getElementById("lyrics");
 
 video.addEventListener("timeupdate", function()
 {
-//	   10-14 Children have You ever met the Bogeyman before
-//	   14-17.5 No, of course You haven't for You're much too good, I'm sure;
-//	   17.5-21.5 Don't You be afraid of him if he should visit You,
-//	   21.5-26 He's a great big coward, so I'll tell You what to do
-//
+    if (video.currentTime >= 9.5 && video.currentTime < 13.5)
+	   caps.innerHTML = "<p>Children have You ever met the Bogeyman before</p>";
+					   
+    else if (video.currentTime >= 13.5 && video.currentTime < 17.5)
+	   caps.innerHTML = "<p>No, of course You haven't for You're much too good, I'm sure</p>";
+    
+    else if (video.currentTime >= 17.5 && video.currentTime < 21.5)
+        caps.innerHTML = "<p>Don't You be afraid of him if he should visit You</p>";
+    
+    else if (video.currentTime >= 21.5 && video.currentTime < 26)
+        caps.innerHTML = "<p>He's a great big coward, so I'll tell You what to do</p>";
+    
+    else
+        caps.innerHTML = "";
+
 //	   26-29 Hush, hush, hush, here comes the Bogeyman,
 //	   29-33.5 Don't let him come too close to You, he'll catch you if he can.
 //	   33.5-37.5 Just pretend that you're a crocodile
