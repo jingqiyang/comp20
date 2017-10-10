@@ -11,3 +11,17 @@
         background:url("garfield.gif") -406px 0px;
     }
 }
+
+@media screen and (min-width: 1001px) and (max-width: 1100px) {
+    .garfield {
+        width:201px; height:130px;
+        background:url("garfield.gif") 0 -134px;
+    }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1000px) {
+    .garfield {
+        width:195px; height:127px;
+        background:url("garfield.gif") -203px -134px;
+    }
+}
