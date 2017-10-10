@@ -21,7 +21,22 @@
 
 @media screen and (min-width: 901px) and (max-width: 1000px) {
     .garfield {
-        width:195px; height:127px;
+        width:195px; height:130px;
         background:url("garfield.gif") -203px -134px;
+    }
+}
+
+
+@media screen and (min-width: 801px) and (max-width: 900px) {
+    .garfield {
+        width:194px; height:130px;
+        background:url("garfield.gif") -406px -134px;
+    }
+}
+
+@media screen and (min-width: 701px) and (max-width: 800px) {
+    .garfield {
+        width:194px; height:128px;
+        background:url("garfield.gif") 0 -270px;
     }
 }
