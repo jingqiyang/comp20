@@ -27,19 +27,34 @@ video.addEventListener
     
     else if (video.currentTime >= 37.5 && video.currentTime < 41.5)
         caps.innerHTML = "<p>And you will find that Bogeyman will run away a mile</p>";
-                       
+   
+    else if (video.currentTime >= 41.5 && video.currentTime < 45.5)
+        caps.innerHTML = "<p>Say Shoo shoo and stick him with a pin</p>";
+    
+    else if (video.currentTime >= 45.5 && video.currentTime < 49)
+        caps.innerHTML = "<p>Bogeyman will very nearly jump out of his skin</p>";
+    
+    else if (video.currentTime >= 49 && video.currentTime < 53)
+        caps.innerHTML = "<p>Say buzz buzz just like the wasps that sting</p>";
+    
+    else if (video.currentTime >= 53 && video.currentTime < 57)
+        caps.innerHTML = "<p>Bogeyman will think you are an elephant with wings</p>";
+    
+    else if (video.currentTime >= 57 && video.currentTime < 61)
+        caps.innerHTML = "<p>Hush, hush, hush, here comes the Bogeyman</p>";
+    
+    else if (video.currentTime >= 61 && video.currentTime < 65)
+        caps.innerHTML = "<p>♪ [instrumental]</p>";
+    
+    else if (video.currentTime >= 65 && video.currentTime < 68.5)
+        caps.innerHTML = "<p>Tell him you've got soldiers in your bed</p>";
+    
+    else if (video.currentTime >= 68.5 && video.currentTime < 72)
+        caps.innerHTML = "<p>For he will never guess that they are only made of lead</p>";
+    
     else
         caps.innerHTML = "";
 
-//	   41.5-45.5 Say Shoo shoo and stick him with a pin
-//	   45.5-49.5 Bogeyman will very nearly jump out of his skin
-//	   49.5-53 Say buzz buzz just like the wasps that sting
-//	   53-57.5 Bogeyman will think you are an elephant with wings
-//
-//	   57.5-61 Hush, hush, hush, here comes the Bogeyman
-//	   65-68.5 Tell him you've got soldiers in your bed
-//	   68.5-72 For he will never guess that they are only made of lead
-//
 //	   80.5-84.5 Say Hush hush, he'll think that you're asleep
 //	   84.5-88 If you make a lovely snore away he'll softly creep
 //	   88-92 Sing this tune you children one and all
