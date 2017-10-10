@@ -1,2 +1,2 @@
-#Jingqi Yang's COMP 20 Repo
-##Fall 2017
+# Jingqi Yang's COMP 20 Repo
+## Fall 2017
