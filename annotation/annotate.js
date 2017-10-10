@@ -1,7 +1,8 @@
 video = document.getElementById("a_classic");
 caps = document.getElementById("lyrics");
 
-video.addEventListener("timeupdate", function()
+video.addEventListener
+   ("timeupdate", function()
 {
     if (video.currentTime >= 9.5 && video.currentTime < 13.5)
 	   caps.innerHTML = "<p>Children have You ever met the Bogeyman before</p>";
@@ -12,17 +13,24 @@ video.addEventListener("timeupdate", function()
     else if (video.currentTime >= 17.5 && video.currentTime < 21.5)
         caps.innerHTML = "<p>Don't You be afraid of him if he should visit You</p>";
     
-    else if (video.currentTime >= 21.5 && video.currentTime < 26)
+    else if (video.currentTime >= 21.5 && video.currentTime < 25.5)
         caps.innerHTML = "<p>He's a great big coward, so I'll tell You what to do</p>";
     
+    else if (video.currentTime >= 25.5 && video.currentTime < 29)
+        caps.innerHTML = "<p>Hush, hush, hush, here comes the Bogeyman</p>";
+    
+    else if (video.currentTime >= 29 && video.currentTime < 33.5)
+        caps.innerHTML = "<p>Don't let him come too close to You, he'll catch you if he can</p>";
+    
+   else if (video.currentTime >= 33.5 && video.currentTime < 37.5)
+        caps.innerHTML = "<p>Just pretend that you're a crocodile</p>";
+    
+    else if (video.currentTime >= 37.5 && video.currentTime < 41.5)
+        caps.innerHTML = "<p>And you will find that Bogeyman will run away a mile</p>";
+                       
     else
         caps.innerHTML = "";
 
-//	   26-29 Hush, hush, hush, here comes the Bogeyman,
-//	   29-33.5 Don't let him come too close to You, he'll catch you if he can.
-//	   33.5-37.5 Just pretend that you're a crocodile
-//	   37.5-41.5 And you will find that Bogeyman will run away a mile.
-//
 //	   41.5-45.5 Say Shoo shoo and stick him with a pin
 //	   45.5-49.5 Bogeyman will very nearly jump out of his skin
 //	   49.5-53 Say buzz buzz just like the wasps that sting
