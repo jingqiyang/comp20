@@ -1,5 +1,4 @@
 var myLat = 0, myLng = 0, me;
-var request = new XMLHttpRequest(); //make instance of XMLHttpRequest
 
 //options for loading map
 var myOptions =
@@ -49,3 +48,19 @@ function renderMap()
         infoWindow.open(map, marker);
     });
 }
+
+var request = new XMLHttpRequest(); //make instance of XMLHttpRequest
+request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+request.open("GET", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
+
+request.onreadystatechange = function()
+{
+    if (request.readyState == 4 && request.status == 200)
+    {
+        var rawData = request.responseText;
+        var locations = JSON.parse(rawData);
+    }
+}
+
+request.send("login=7QNJ31fE&lat=myLat&lng=myLng");
