@@ -31,12 +31,16 @@ function getMyLocation()
         alert("Geolocation is not supported by your web browser.  Sorry!");
 }
 
-var request = new XMLHttpRequest(); //make instance of XMLHttpRequest
+//make instance of XMLHttpRequest
+var request = new XMLHttpRequest();
 
+//set up http request
 request.open("GET", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
 
+//add parameter to http request header
 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
+//set up callback on what to do when response is received
 request.onreadystatechange = function()
 {
     if (request.readyState == 4 && request.status == 200)
@@ -47,6 +51,7 @@ request.onreadystatechange = function()
     }
 }
 
+//fire off request
 request.send("login=7QNJ31fE&lat=myLat&lng=myLng");
 
 function renderMap()
