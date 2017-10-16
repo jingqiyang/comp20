@@ -32,9 +32,10 @@ function getMyLocation()
 }
 
 var request = new XMLHttpRequest(); //make instance of XMLHttpRequest
-request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 request.open("GET", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
+
+request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
 request.onreadystatechange = function()
 {
