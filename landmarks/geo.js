@@ -31,24 +31,6 @@ function getMyLocation()
         alert("Geolocation is not supported by your web browser.  Sorry!");
 }
 
-function renderMap()
-{
-    me = new google.maps.LatLng(myLat, myLng);
-    
-    // Update map and go to my location
-    map.panTo(me);
-    
-    // Create a marker
-    marker = new google.maps.Marker({position: me, title: "Me!"});
-    marker.setMap(map);
-    
-    // Open info window on click of marker
-    google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.setContent(marker.title);
-        infoWindow.open(map, marker);
-    });
-}
-
 var request = new XMLHttpRequest(); //make instance of XMLHttpRequest
 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
@@ -60,7 +42,26 @@ request.onreadystatechange = function()
     {
         var rawData = request.responseText;
         var locations = JSON.parse(rawData);
+        console.log(locations);
     }
 }
 
 request.send("login=7QNJ31fE&lat=myLat&lng=myLng");
+
+function renderMap()
+{
+    me = new google.maps.LatLng(myLat, myLng);
+    
+    // Update map and go to my location
+    map.panTo(me);
+    
+    // Create a marker
+    myMarker = new google.maps.Marker({position: me, title: "Me!"});
+    myMarker.setMap(map);
+    
+    // Open info window on click of marker
+    google.maps.event.addListener(myMarker, 'click', function() {
+        infoWindow.setContent(myMarker.title);
+        infoWindow.open(map, myMarker);
+    });
+}
