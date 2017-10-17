@@ -35,7 +35,7 @@ function getMyLocation()
 var request = new XMLHttpRequest();
 
 //set up http request
-request.open("GET", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
+request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
 
 //add parameter to http request header
 request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
