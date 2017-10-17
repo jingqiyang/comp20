@@ -24,14 +24,13 @@ function getMyLocation()
         {
             myLat = position.coords.latitude;
             myLng = position.coords.longitude;
-            renderMap();
             ajax();
+            renderMap();
         });
     }
     else
         alert("Geolocation is not supported by your web browser.  Sorry!");
 }
-
 
 function ajax()
 {
