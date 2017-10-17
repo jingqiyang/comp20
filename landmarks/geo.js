@@ -1,4 +1,4 @@
-var myLat = 0, myLng = 0, me;
+var myLat = -99, myLng = -99, me;
 
 //options for loading map
 var myOptions =
@@ -25,34 +25,39 @@ function getMyLocation()
             myLat = position.coords.latitude;
             myLng = position.coords.longitude;
             renderMap();
+            ajax();
         });
     }
     else
         alert("Geolocation is not supported by your web browser.  Sorry!");
 }
 
-//make instance of XMLHttpRequest
-var request = new XMLHttpRequest();
 
-//set up http request
-request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
-
-//add parameter to http request header
-request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-//set up callback on what to do when response is received
-request.onreadystatechange = function()
+function ajax()
 {
-    if (request.readyState == 4 && request.status == 200)
-    {
-        var rawData = request.responseText;
-        var locations = JSON.parse(rawData);
-        console.log(locations);
-    }
-}
+    //make instance of XMLHttpRequest
+    var request = new XMLHttpRequest();
 
-//fire off request
-request.send("login=7QNJ31fE&lat=myLat&lng=myLng");
+    //set up http request
+    request.open("POST", "https://defense-in-derpth.herokuapp.com/sendLocation", true);
+
+    //add parameter to http request header
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    //set up callback on what to do when response is received
+    request.onreadystatechange = function()
+    {
+        if (request.readyState == 4 && request.status == 200)
+        {
+            var rawData = request.responseText;
+            var locations = JSON.parse(rawData);
+            console.log(locations);
+        }
+    }
+    
+    //fire off request
+    request.send("login=7QNJ31fE&lat=myLat&lng=myLng");
+}
 
 function renderMap()
 {
