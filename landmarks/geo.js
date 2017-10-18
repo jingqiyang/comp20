@@ -50,12 +50,15 @@ function ajax()
         {
             var rawData = request.responseText;
             var locations = JSON.parse(rawData);
-            console.log(locations);
+            //console.log(locations);
         }
     }
     
     //fire off request
-    request.send("login=7QNJ31fE&lat=myLat&lng=myLng");
+    var parameters = "login=7QNJ31fE" + "&" +
+                     "lat=" + myLat + "&" +
+                     "lng=" + myLng;
+    request.send(parameters);
 }
 
 function renderMap()
