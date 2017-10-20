@@ -70,35 +70,23 @@ function renderMap()
     //markers icons
     var meIcon = "me-emoji.png", friendIcon = "friend-emoji.png", landmarkIcon = "landmark-emoji.png";
     
-    //create user marker
-    myMarker = new google.maps.Marker({
-        position: me,
-        map: map,
-        title: "Me!",
-        icon: meIcon
-    });
-    
-    //user marker info window
-    google.maps.event.addListener(myMarker, 'click', function() {
-        infoWindow.setContent(myMarker.title);
-        infoWindow.open(map, myMarker);
-    });
-    
     //console.log(locations);
-    //console.log(locations["people"].length);
-    //console.log(locations["people"][0]["lat"]);
 
     //create friend markers
     for (i = 0; i < locations["people"].length; i++)
     {
-        friend = {lat: (locations["people"])[i]["lat"], lng: (locations["people"])[i]["lng"]};
-     
-        friendMarker = new google.maps.Marker({
-            position: friend,
-            map: map,
-            title: "friend!",
-            icon: friendIcon
-        });
+        //if person is not user
+        if (locations["people"][i]["login"] != "7QNJ31fE")
+        {
+            friend = {lat: (locations["people"])[i]["lat"], lng: (locations["people"])[i]["lng"]};
+         
+            friendMarker = new google.maps.Marker({
+                position: friend,
+                map: map,
+                title: "friend!",
+                icon: friendIcon
+            });
+        }
     }
 
     //create landmark markers
@@ -117,4 +105,18 @@ function renderMap()
             icon: landmarkIcon
         });
     }
+    
+    //create user marker after landmark & friend markers are set
+    myMarker = new google.maps.Marker({
+        position: me,
+        map: map,
+        title: "Me!",
+        icon: meIcon
+    });
+    
+    //user marker info window
+    google.maps.event.addListener(myMarker, 'click', function() {
+        infoWindow.setContent(myMarker.title);
+        infoWindow.open(map, myMarker);
+    });
 }
