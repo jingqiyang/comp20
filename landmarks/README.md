@@ -10,11 +10,11 @@ correct implementations:
 
 collaborators/sources:
 * MP Monks: helped with sending parameters to datastore as string
-* [Herman Schaaf on stackoverflow: info on setting info windows with for loop] (https://stackoverflow.com/questions/5736691/google-maps-infowindow-showing-on-wrong-marker)
-* [H.M. & Leigh on stackoverflow: info on "this" in js] (https://stackoverflow.com/questions/3576488/google-maps-infowindow-only-loading-last-record-on-markers)
-* [Salman's Web Development Blog: info on bringing google maps marker to front] (http://salman-w.blogspot.com/2012/07/change-z-index-google-map-v3-markers.html)
-* [talkol on stackoverflow: haversine formula + functions to calculate distance between 2 geolocations] (https://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript)
-* [emojipedia: icons for markers] (https://emojipedia.org/messenger/)
+* [Herman Schaaf on stackoverflow: info on setting info windows with for loop](https://stackoverflow.com/questions/5736691/google-maps-infowindow-showing-on-wrong-marker)
+* [H.M. & Leigh on stackoverflow: info on "this" in js](https://stackoverflow.com/questions/3576488/google-maps-infowindow-only-loading-last-record-on-markers)
+* [Salman's Web Development Blog: info on bringing google maps marker to front](http://salman-w.blogspot.com/2012/07/change-z-index-google-map-v3-markers.html)
+* [talkol on stackoverflow: haversine formula + functions to calculate distance between 2 geolocations](https://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript)
+* [emojipedia: icons for markers](https://emojipedia.org/messenger/)
 * Google Maps API
 
 approximately 8-10 hrs spent on assignment
