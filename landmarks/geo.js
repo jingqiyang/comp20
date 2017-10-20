@@ -25,7 +25,6 @@ function getMyLocation()
             myLat = position.coords.latitude;
             myLng = position.coords.longitude;
             ajax();
-            renderMap();
         });
     }
     else
@@ -49,8 +48,9 @@ function ajax()
         if (request.readyState == 4 && request.status == 200)
         {
             var rawData = request.responseText;
-            var locations = JSON.parse(rawData);
+            locations = JSON.parse(rawData);
             //console.log(locations);
+            renderMap();
         }
     }
     
@@ -68,13 +68,38 @@ function renderMap()
     // Update map and go to my location
     map.panTo(me);
     
-    // Create a marker
-    myMarker = new google.maps.Marker({position: me, title: "Me!"});
-    myMarker.setMap(map);
+    //markers icons
+    var meIcon = "me-emoji.png", friendIcon = "friend-emoji", landmarkIcon = "landmark-emoji.png";
     
-    // Open info window on click of marker
+    //create user marker
+    myMarker = new google.maps.Marker({
+        position: me,
+        map: map,
+        title: "Me!",
+        icon: meIcon
+    });
+    
+    //user marker info window
     google.maps.event.addListener(myMarker, 'click', function() {
         infoWindow.setContent(myMarker.title);
         infoWindow.open(map, myMarker);
     });
+    
+    //console.log(locations);
+    
+    /*
+     console.log((locations["people"]).length);
+     //create friend markers
+     for (i = 0; i < locations["people"].length; i++)
+     {
+         friend = {lat: (locations["people"])[i][2], lng: (locations["people"])[i][3]};
+     
+             friendMarker = new google.maps.Marker({
+                 position: friend,
+                 map: map,
+                 title: "Me!",
+                 icon: meIcon
+             });
+     }
+     */
 }
