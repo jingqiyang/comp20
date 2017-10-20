@@ -3,7 +3,7 @@ var myLat = -99, myLng = -99, me;
 //options for loading map
 var myOptions =
 {
-    zoom: 13,
+    zoom: 14,
     center: me,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 };
