@@ -5,7 +5,8 @@ correct implementations:
 * use herokuapp datastore API, google maps js API, html5 geolocation API, ajax with XMLHttpRequest
 * retrieve user location with js navigator.geolocation object & and send location data to datastore
 * retrieve historic landmarks & locations of people in class within 1 mile of user
-* display markers on map with unique icons for each type
+* display markers on map for user, user's friends/classmates, and historical landmarks with unique icons for each type
+* does not display markers for previous instances of the user!
 * friend/classmate marker info window displays login and distance in miles
 * landmark marker info window displays landmark details
 * user marker info window displays "You are here!" & closest landmark & distance to closest landmark in miles
