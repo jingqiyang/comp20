@@ -68,7 +68,7 @@ function renderMap()
     map.panTo(me);
     
     //markers icons
-    var myIcon = "me-emoji.png", friendIcon = "friend-emoji.png", landmarkIcon = "landmark-emoji.png";
+    var myIcon = "myicon.png", friendIcon = "friendicon.png", landmarkIcon = "landmarkicon.png";
     
     //create friend markers
     for (i = 0; i < locations["people"].length; i++)
