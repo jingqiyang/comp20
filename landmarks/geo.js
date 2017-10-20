@@ -49,7 +49,6 @@ function ajax()
         {
             var rawData = request.responseText;
             locations = JSON.parse(rawData);
-            //console.log(locations);
             renderMap();
         }
     }
@@ -86,20 +85,36 @@ function renderMap()
     });
     
     //console.log(locations);
-    
     //console.log(locations["people"].length);
     //console.log(locations["people"][0]["lat"]);
-    
+
     //create friend markers
     for (i = 0; i < locations["people"].length; i++)
     {
         friend = {lat: (locations["people"])[i]["lat"], lng: (locations["people"])[i]["lng"]};
      
-            friendMarker = new google.maps.Marker({
-                position: friend,
-                map: map,
-                title: "Me!",
-                icon: friendIcon
-            });
+        friendMarker = new google.maps.Marker({
+            position: friend,
+            map: map,
+            title: "friend!",
+            icon: friendIcon
+        });
+    }
+
+    //create landmark markers
+    for (i = 0; i < locations["landmarks"].length; i++)
+    {
+        landmark =
+        {
+            lat: (locations["landmarks"])[i]["geometry"]["coordinates"][1],
+            lng: (locations["landmarks"])[i]["geometry"]["coordinates"][0]
+        };
+
+        landMarker = new google.maps.Marker({
+            position: landmark,
+            map: map,
+            title: "landmark!",
+            icon: landmarkIcon
+        });
     }
 }
