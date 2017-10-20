@@ -70,8 +70,6 @@ function renderMap()
     //markers icons
     var meIcon = "me-emoji.png", friendIcon = "friend-emoji.png", landmarkIcon = "landmark-emoji.png";
     
-    //console.log(locations);
-    
     //create user marker
     myMarker = new google.maps.Marker({
         position: me,
@@ -116,9 +114,7 @@ function addFriendMarker(i, friendIcon)
             icon: friendIcon
         });
         
-        friendMarker.content = "login: " + locations["people"][i]["login"] + "<br />" + "distance: " + distance + " miles";
-        
-        //friendMarker.infoWindow = new google.maps.InfoWindow();
+        friendMarker.content = "<p>" + "login: " + locations["people"][i]["login"] + "<br />" + "distance: " + distance + " miles" + "</p>";
         
         //friend marker info window
         google.maps.event.addListener(friendMarker, 'click', function()
@@ -141,6 +137,15 @@ function addLandMarker(i, landmarkIcon)
         position: landmark,
         map: map,
         icon: landmarkIcon
+    });
+
+    landMarker.content = locations["landmarks"][i]["properties"]["Details"];
+    
+    //friend marker info window
+    google.maps.event.addListener(landMarker, 'click', function()
+    {
+        infoWindow.setContent(this.content);
+        infoWindow.open(map, this);
     });
 }
 
