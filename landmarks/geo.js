@@ -89,7 +89,7 @@ function renderMap()
             closestLandmark = currMarker;
     }
     
-    //console.log(locations);
+    console.log(locations);
     //create user marker
     addMyMarker(myIcon, closestLandmark);
 }
@@ -104,8 +104,6 @@ function addFriendMarker(i, friendIcon)
         var friendLng = locations["people"][i]["lng"];
         friend = {lat: friendLat, lng: friendLng};
         
-        //distance = google.maps.geometry.spherical.computeDistanceBetween(me, friend) / 1609.34;
-        
         distance = calcDistance(myLat, myLng, friendLat, friendLng);    //distance between user and friend
         
         friendMarker = new google.maps.Marker({
@@ -115,7 +113,7 @@ function addFriendMarker(i, friendIcon)
         });
         
         //info window content
-        friendMarker.content = "<p>" + "Login: " + locations["people"][i]["login"] + "<br />" + "Distance: " + distance + " miles</p>";
+        friendMarker.content = "<p>" + "<strong>Login:</strong> " + locations["people"][i]["login"] + "<br />" + "<strong>Distance:</strong> " + distance + " miles</p>";
         
         //set friend info window
         google.maps.event.addListener(friendMarker, 'click', function()
@@ -165,9 +163,12 @@ function addLandMarker(i, landmarkIcon)
          map: map,
          icon: myIcon
      });
- 
+     
+     //set marker to appear above other markers
+     myMarker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
+     
      //user info window content
-     myMarker.content = "<p>" + "You are here!" + "<br />" + "Closest landmark: " + closestLandmark.name + "<br />" + "Distance: " + closestLandmark.distance + " miles</p>";
+     myMarker.content = "<p>" + "You are here!" + "</p>" + "<p><strong>Closest Landmark:</strong> " + closestLandmark.name + "<br />" + "<strong>Distance:</strong> " + closestLandmark.distance + " miles</p>";
  
      //set user info window
      google.maps.event.addListener(myMarker, 'click', function()
