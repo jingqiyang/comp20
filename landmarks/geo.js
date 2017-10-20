@@ -176,22 +176,22 @@ function addMyMarker(myIcon, closestLandmark)
     {
         infoWindow.setContent(myMarker.content);
         infoWindow.open(map, myMarker);
+    });
     
-        //coordinates of path between user & closest landmark
-        var pathCoords = [
-            {lat: myLat, lng: myLng},
-            {lat: closestLandmark.lat, lng: closestLandmark.lng}
-            ];
-         
-        //render polyline between user & closest landmark
-        var pathToLandmark = new google.maps.Polyline({
-            path: pathCoords,
-            map: map,
-            geodesic: true,
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 2
-        });
+    //coordinates of path between user & closest landmark
+    var pathCoords = [
+        {lat: myLat, lng: myLng},
+        {lat: closestLandmark.lat, lng: closestLandmark.lng}
+        ];
+     
+    //render polyline between user & closest landmark
+    var pathToLandmark = new google.maps.Polyline({
+        path: pathCoords,
+        map: map,
+        geodesic: true,
+        strokeColor: '#016327',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
     });
 }
 
@@ -202,6 +202,7 @@ Number.prototype.toRad = function()
 }
 
 //calculate distance in miles between 2 geolocations
+//from https://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript
 function calcDistance(lat1, lng1, lat2, lng2)
 {
     var x1 = lat2 - lat1;
@@ -215,5 +216,5 @@ function calcDistance(lat1, lng1, lat2, lng2)
     
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     
-    return c * 3.9587657052;    //miles
+    return c * 3958.7657052;    //miles
 }
