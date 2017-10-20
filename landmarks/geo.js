@@ -69,7 +69,7 @@ function renderMap()
     map.panTo(me);
     
     //markers icons
-    var meIcon = "me-emoji.png", friendIcon = "friend-emoji", landmarkIcon = "landmark-emoji.png";
+    var meIcon = "me-emoji.png", friendIcon = "friend-emoji.png", landmarkIcon = "landmark-emoji.png";
     
     //create user marker
     myMarker = new google.maps.Marker({
@@ -87,19 +87,19 @@ function renderMap()
     
     //console.log(locations);
     
-    /*
-     console.log((locations["people"]).length);
-     //create friend markers
-     for (i = 0; i < locations["people"].length; i++)
-     {
-         friend = {lat: (locations["people"])[i][2], lng: (locations["people"])[i][3]};
+    //console.log(locations["people"].length);
+    //console.log(locations["people"][0]["lat"]);
+    
+    //create friend markers
+    for (i = 0; i < locations["people"].length; i++)
+    {
+        friend = {lat: (locations["people"])[i]["lat"], lng: (locations["people"])[i]["lng"]};
      
-             friendMarker = new google.maps.Marker({
-                 position: friend,
-                 map: map,
-                 title: "Me!",
-                 icon: meIcon
-             });
-     }
-     */
+            friendMarker = new google.maps.Marker({
+                position: friend,
+                map: map,
+                title: "Me!",
+                icon: friendIcon
+            });
+    }
 }
