@@ -68,30 +68,30 @@ function renderMap()
     map.panTo(me);
     
     //markers icons
-    var meIcon = "me-emoji.png", friendIcon = "friend-emoji.png", landmarkIcon = "landmark-emoji.png";
-    
-    //create user marker
-    myMarker = new google.maps.Marker({
-        position: me,
-        map: map,
-        title: "Me!",
-        icon: meIcon
-    });
-
-    //user marker info window
-    google.maps.event.addListener(myMarker, 'click', function()
-    {
-        infoWindow.setContent(myMarker.title);
-        infoWindow.open(map, myMarker);
-    });
+    var myIcon = "me-emoji.png", friendIcon = "friend-emoji.png", landmarkIcon = "landmark-emoji.png";
     
     //create friend markers
     for (i = 0; i < locations["people"].length; i++)
         addFriendMarker(i, friendIcon);
     
+    //set initial closest to first landmark
+    var closestLandmark;
+
     //create landmark markers
     for (i = 0; i < locations["landmarks"].length; i++)
-        addLandMarker(i, landmarkIcon);
+    {
+        currMarker = addLandMarker(i, landmarkIcon);
+        
+        if (i == 0) //set initial closest to first marker in list
+            closestLandmark = currMarker;
+        
+        if (currMarker.distance < closestLandmark.distance)
+            closestLandmark = currMarker;
+    }
+    
+    //console.log(locations);
+    //create user marker
+    addMyMarker(myIcon, closestLandmark);
 }
 
 //create friend marker
@@ -106,7 +106,7 @@ function addFriendMarker(i, friendIcon)
         
         //distance = google.maps.geometry.spherical.computeDistanceBetween(me, friend) / 1609.34;
         
-        distance = calcDistance(myLat, myLng, friendLat, friendLng);
+        distance = calcDistance(myLat, myLng, friendLat, friendLng);    //distance between user and friend
         
         friendMarker = new google.maps.Marker({
             position: friend,
@@ -114,9 +114,10 @@ function addFriendMarker(i, friendIcon)
             icon: friendIcon
         });
         
-        friendMarker.content = "<p>" + "login: " + locations["people"][i]["login"] + "<br />" + "distance: " + distance + " miles" + "</p>";
+        //info window content
+        friendMarker.content = "<p>" + "Login: " + locations["people"][i]["login"] + "<br />" + "Distance: " + distance + " miles</p>";
         
-        //friend marker info window
+        //set friend info window
         google.maps.event.addListener(friendMarker, 'click', function()
         {
             infoWindow.setContent(this.content);
@@ -126,6 +127,7 @@ function addFriendMarker(i, friendIcon)
 }
 
 //create landmark marker
+//returns marker
 function addLandMarker(i, landmarkIcon)
 {
     var landmarkLat = locations["landmarks"][i]["geometry"]["coordinates"][1];
@@ -139,15 +141,41 @@ function addLandMarker(i, landmarkIcon)
         icon: landmarkIcon
     });
 
-    landMarker.content = locations["landmarks"][i]["properties"]["Details"];
+    landMarker.name = locations["landmarks"][i]["properties"]["Location_Name"];      //set name
     
-    //friend marker info window
+    landMarker.distance = calcDistance(myLat, myLng, landmarkLat, landmarkLng);     //set distance from user
+    
+    landMarker.content = locations["landmarks"][i]["properties"]["Details"];    //set info window content
+    
+    //set friend info window
     google.maps.event.addListener(landMarker, 'click', function()
     {
         infoWindow.setContent(this.content);
         infoWindow.open(map, this);
     });
+    
+    return landMarker;
 }
+
+ function addMyMarker(myIcon, closestLandmark)
+ {
+     //create user marker
+     myMarker = new google.maps.Marker({
+         position: me,
+         map: map,
+         icon: myIcon
+     });
+ 
+     //user info window content
+     myMarker.content = "<p>" + "You are here!" + "<br />" + "Closest landmark: " + closestLandmark.name + "<br />" + "Distance: " + closestLandmark.distance + " miles</p>";
+ 
+     //set user info window
+     google.maps.event.addListener(myMarker, 'click', function()
+     {
+         infoWindow.setContent(myMarker.content);
+         infoWindow.open(map, myMarker);
+     });
+ }
 
 //convert to radians
 Number.prototype.toRad = function()
