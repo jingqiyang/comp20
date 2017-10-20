@@ -89,7 +89,6 @@ function renderMap()
             closestLandmark = currMarker;
     }
     
-    console.log(locations);
     //create user marker
     addMyMarker(myIcon, closestLandmark);
 }
@@ -131,7 +130,7 @@ function addLandMarker(i, landmarkIcon)
     var landmarkLat = locations["landmarks"][i]["geometry"]["coordinates"][1];
     var landmarkLng = locations["landmarks"][i]["geometry"]["coordinates"][0];
     
-    landmark = {lat: landmarkLat, lng: landmarkLng};
+    landmark = {lat: landmarkLat, lng: landmarkLng};    //position
 
     landMarker = new google.maps.Marker({
         position: landmark,
@@ -140,6 +139,8 @@ function addLandMarker(i, landmarkIcon)
     });
 
     landMarker.name = locations["landmarks"][i]["properties"]["Location_Name"];      //set name
+    
+    landMarker.lat = landmarkLat, landMarker.lng = landmarkLng;
     
     landMarker.distance = calcDistance(myLat, myLng, landmarkLat, landmarkLng);     //set distance from user
     
@@ -155,28 +156,44 @@ function addLandMarker(i, landmarkIcon)
     return landMarker;
 }
 
- function addMyMarker(myIcon, closestLandmark)
- {
-     //create user marker
-     myMarker = new google.maps.Marker({
-         position: me,
-         map: map,
-         icon: myIcon
-     });
-     
-     //set marker to appear above other markers
-     myMarker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
-     
-     //user info window content
-     myMarker.content = "<p>" + "You are here!" + "</p>" + "<p><strong>Closest Landmark:</strong> " + closestLandmark.name + "<br />" + "<strong>Distance:</strong> " + closestLandmark.distance + " miles</p>";
- 
-     //set user info window
-     google.maps.event.addListener(myMarker, 'click', function()
-     {
-         infoWindow.setContent(myMarker.content);
-         infoWindow.open(map, myMarker);
-     });
- }
+function addMyMarker(myIcon, closestLandmark)
+{
+    //create user marker
+    myMarker = new google.maps.Marker({
+        position: me,
+        map: map,
+        icon: myIcon
+    });
+
+    //set marker to appear above other markers
+    myMarker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
+
+    //user info window content
+    myMarker.content = "<p>" + "You are here!" + "</p>" + "<p><strong>Closest Landmark:</strong> " + closestLandmark.name + "<br />" + "<strong>Distance:</strong> " + closestLandmark.distance + " miles</p>";
+
+    //set user info window
+    google.maps.event.addListener(myMarker, 'click', function()
+    {
+        infoWindow.setContent(myMarker.content);
+        infoWindow.open(map, myMarker);
+    
+        //coordinates of path between user & closest landmark
+        var pathCoords = [
+            {lat: myLat, lng: myLng},
+            {lat: closestLandmark.lat, lng: closestLandmark.lng}
+            ];
+         
+        //render polyline between user & closest landmark
+        var pathToLandmark = new google.maps.Polyline({
+            path: pathCoords,
+            map: map,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+        });
+    });
+}
 
 //convert to radians
 Number.prototype.toRad = function()
