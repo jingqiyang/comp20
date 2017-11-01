@@ -2,19 +2,21 @@ $(document).ready(function()
 {
     $("#msg").change(function()
     {
-        var logs = getMessage();
-        store(logs);
-        load();
+        var logs = getMessage();    //create list with new msg
+        store(logs);    //store logs as string in local storage
+        load(); //parse string in local storage & update html
     });
 });
 
-//store message in string
+//create list of messages
 function getMessage()
 {
     var date = new Date();
     //var time = date.getTime();
     
     var month = date.getMonth() + 1;
+    
+    //store new msg in string
     var msg = "<p>" + date.getHours() + ":" +
     date.getMinutes() + " " +
     month + "/" +
@@ -22,7 +24,7 @@ function getMessage()
     date.getFullYear() + " - " +
     $("#msg").val() + "</p>";
     
-    var logs = [msg];  //add new msg to front of list
+    var logs = [msg];  //create list with new msg
     return logs;
 }
 
@@ -38,10 +40,16 @@ function store(logs)
             logs.push(prevLogs[i]);
     }
 
+    //store as json string
     localStorage.setItem("logs", JSON.stringify(logs));
 }
 
+//load all logs
 function load()
 {
-    $("#log").html(localStorage.getItem("logs"));
+    //all logs
+    var logs = JSON.parse(localStorage.getItem("logs"));
+    
+    for (i = 0; i < logs.length; ++i)
+        $("#log").append(logs[i]);
 }
