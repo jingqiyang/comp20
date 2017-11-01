@@ -50,6 +50,7 @@ function load()
     //all logs
     var logs = JSON.parse(localStorage.getItem("logs"));
     
+    $("#log").empty();
     for (i = 0; i < logs.length; ++i)
         $("#log").append(logs[i]);
 }
