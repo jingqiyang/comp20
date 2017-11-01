@@ -2,30 +2,46 @@ $(document).ready(function()
 {
     $("#msg").change(function()
     {
-        store();    //store in local storage
-        load();      //load all logs
+        var logs = getMessage();
+        store(logs);
+        load();
     });
 });
 
-//store new entry in local storage
-function store()
+//store message in string
+function getMessage()
 {
     var date = new Date();
-    var key = date.getTime();
+    //var time = date.getTime();
     
     var month = date.getMonth() + 1;
-    var value = "<p>" + date.getHours() + ":" +
+    var msg = "<p>" + date.getHours() + ":" +
     date.getMinutes() + " " +
     month + "/" +
     date.getDate() + "/" +
     date.getFullYear() + " - " +
     $("#msg").val() + "</p>";
     
-    localStorage.setItem(key, value);
+    var logs = [msg];  //add new msg to front of list
+    return logs;
 }
 
-//load logs in reverse chronological order
+//store new entry in local storage
+function store(logs)
+{
+    //previous logs
+    var prevLogs = JSON.parse(localStorage.getItem("logs"));
+    
+    if (prevLogs)   //if not null
+    {
+        for (var i = 0; i < prevLogs.length; ++i)
+            logs.push(prevLogs[i]);
+    }
+
+    localStorage.setItem("logs", JSON.stringify(logs));
+}
+
 function load()
 {
-    
+    $("#log").html(localStorage.getItem("logs"));
 }
