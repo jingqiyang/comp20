@@ -1,1 +1,1 @@
-I'm an evil virus! Pretend this is an exe file and will run automatically upon opening!
+I'm an evil virus! Pretend I'm an exe file so I'll be automatically downloaded instead of opened in another window, and will be automatically run when opened!
