@@ -24,11 +24,11 @@
 
 <h3>Issues Found</h3>
 <ol>
-<li>Issue:
+<li>Issue: Cross-site scripting
 	<ul>
-	<li>Location of issue:</li>
-	<li>Severity of issue:</li>
-	<li>Description of issue:</li>
+	<li>Location of issue: parsing post parameters sent to server (index.js, line 90)</li>
+	<li>Severity of issue: high</li>
+	<li>Description of issue: The string login parameter stored in the database isn't parsed before being stored in the database, allowing for html script injections. For example, if </li>
 	<li>Proof of vulnerability:</li>
 	<li>Resolution:</li>
 	</ul>
