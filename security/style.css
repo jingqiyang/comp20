@@ -16,3 +16,8 @@ h3 {
 li {
 	margin-bottom:4px;
 }
+
+pre {
+	margin-left:60px;
+	white-space:pre-wrap;
+}

