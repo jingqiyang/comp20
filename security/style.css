@@ -2,4 +2,17 @@ body {
     font-family:'Raleway', sans-serif, Arial;
     font-size:20px;
     margin-left:40px;
+    margin-right:40px;
+}
+
+h1 {
+	font-size:32px;
+}
+
+h3 {
+	font-size:24px;
+}
+
+li {
+	margin-bottom:4px;
 }
