@@ -33,8 +33,10 @@
 	accessing <a href="https://stark-journey-75501.herokuapp.com/">https://stark-journey-75501.herokuapp.com/</a> will cause an automatic redirect to opening the file "virus.txt" in the browser. If the file was a .exe file instead, or any file that's automatically downloaded if it can't be opened in a browser window, serious harm could be caused.
 	</li>
 	<li>Proof of vulnerability:
-		<p><img src="examples/xss-data.png" alt="storage of untrusted data in mongodb logins database" /></p>
-		<p><img src="examples/xss-redirect.png" alt="redirected page due to cross-site script" /></p>
+		<p><img src="examples/xss-data.png" alt="javascript code as login in mongodb logins database" /></p>
+		<p>Injection of harmful javascript code into database as a fake login</p>
+		<p><img src="examples/xss-redirect.png" alt="redirected from home page to opening virus.txt" /></p>
+		<p>The application (server) home page after redirecting to opening the harmful file due to login script</p>
 	</li>
 	<li>Resolution: This issue can be alleviated by removing all special characters from the string login input by replacing index.js line 90 with:
 		<p><pre>var login = request.body.login.replace(/[^\w\s]/gi, '');</pre></p>
@@ -49,8 +51,10 @@
 	<li>Description of issue: The login parameter is directly entered as a search query to the mongodb database. Thus, query operators such as the "not equal" ($ne) operator may be entered and applied so checkins.json returns all the entries not equal to the search query rather than only searching for the query as intended.
 		<p>With the way the app is set up now, the issue does not have much impact, since all the login entries are returned anyway at the '/' homepage. However, it is still important to remove the user's ability to access data on other users to which they should not be privy, in case the app is further developed in a way that information on all users is no longer willingly released.</p></li>
 	<li>Proof of vulnerability:</li>
-		<p><img src="examples/search-noops.png" alt="checkins.json search results for query 'jingqi' without operators returns nothing" /></p>
-		<p><img src="examples/search-ops.png" alt="checkins.json search results for query 'jingqi' with not equal operator returns all login entries in database" /></p>
+		<p><img src="examples/injection-noops.png" alt="checkins.json search results for query 'jingqi' without operators returns nothing" /></p>
+		<p>Fake login 'jingqi' should not return any checkins</p>
+		<p><img src="examples/injection-ops.png" alt="checkins.json search results for query 'jingqi' with not equal operator returns all login entries in database" /></p>
+		<p>Even with the fake login, an injection attack can be made to get all checkins in the database</p>
 	<li>Resolution: Instead of directory passing the query from the GET request to the find function, each entry's login in the database should be compared to the GET request query so no operators will be called. For example, changing index.js lines 69-75 to:
 		<p><pre>
 		<br>coll.find().toArray(function (err, checkins) {
@@ -65,23 +69,28 @@
 	</ul>
 </li>
 <br>
-<li>Issue:
+<li>Issue: Cross-site request forgery
 	<ul>
-	<li>Location of issue:</li>
-	<li>Severity of issue:</li>
-	<li>Description of issue:</li>
+	<li>Location of issue: Where the login is entered to access data from the application (index.js lines 67, 96)</li>
+	<li>Severity of issue: Low, only because the application already allows access to all the login entries elsewhere in the app</li>
+	<li>Description of issue: Though every front-end client was given a specific username to protect user privacy, the validity of this login username is never verified (there is no sign-in process with the login username). Literally anyone who knows the application url and specified parameters can request data on any login in the system.</li>
 	<li>Proof of vulnerability:</li>
-	<li>Resolution:</li>
+		<p><img src="examples/forgery-map.png" alt="fake mchowgrading checkin near me on the google map" /></p>
+		<p>I can alter my login on the client side and make it appear as if mchowgrading logged in near me</p>
+		<p><img src="examples/forgery-search.png" alt="checkins.json search results for query 'mchowgrading'" /></p>
+		<p>I am not mchowgrading, yet I can still see all of mchowgrading's previous checkins</p>
+	<li>Resolution: If a user is to use the server, they should be required to make an account or in some way authenicate that they are exactly that user.</li>
 	</ul>
 </li>
 </ol>
 
 <h3>Conclusion</h3>
-<p>Clearly, you can never trust user input, so if the application needs to take in user input, safeguards are necessary to strip it of danger.</p>
+<p>Clearly, you can never trust user input, so wherever the application takes in user input, such as through a GET or POST request, the input should be checked in some way to safeguard against security failures.</p>
 
 <h3>References</h3>
 <ul>
 <li><a href="https://www.owasp.org/index.php/Top_10_2013-Top_10">https://www.owasp.org/index.php/Top_10_2013-Top_10</a></li>
+<li><a href ="http://cwe.mitre.org/data/definitions/352.html">http://cwe.mitre.org/data/definitions/352.html</a></li>
 </ul>
 
 </body>
