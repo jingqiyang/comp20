@@ -51,7 +51,17 @@
 	<li>Proof of vulnerability:</li>
 		<p><img src="examples/search-noops.png" alt="checkins.json search results for query 'jingqi' without operators returns nothing" /></p>
 		<p><img src="examples/search-ops.png" alt="checkins.json search results for query 'jingqi' with not equal operator returns all login entries in database" /></p>
-	<li>Resolution: Instead of directory passing the query from the GET request to the find function, each entry's login in the database should be compared to the GET request query so no operators will be called.</li>
+	<li>Resolution: Instead of directory passing the query from the GET request to the find function, each entry's login in the database should be compared to the GET request query so no operators will be called. For example, changing index.js lines 69-75 to:
+		<p><pre>
+		<br>coll.find().toArray(function (err, checkins) {
+		<br>    if (!err) {
+		<br>    var userlogins = [];
+		<br>    for (var i = 0; i < results.length; i++)
+		<br>        if (login == checkins[i].login)
+		<br>            userlogins.push(checkins[i]);
+		<br>    res.send(logins);
+		</pre></p>
+	</li>
 	</ul>
 </li>
 <br>
