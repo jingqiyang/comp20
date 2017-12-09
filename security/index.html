@@ -42,10 +42,10 @@
 	</ul>
 </li>
 <br>
-<li>Issue: Unrestricted query search
+<li>Issue: Injection
 	<ul>
 	<li>Location of issue: Finding entries that match the login GET parameter to /checkins.json (index.js line 69)</li>
-	<li>Severity of issue: Low</li>
+	<li>Severity of issue: Low, only because the application already allows access to all the login entries elsewhere in the app</li>
 	<li>Description of issue: The login parameter is directly entered as a search query to the mongodb database. Thus, query operators such as the "not equal" ($ne) operator may be entered and applied so checkins.json returns all the entries not equal to the search query rather than only searching for the query as intended.
 		<p>With the way the app is set up now, the issue does not have much impact, since all the login entries are returned anyway at the '/' homepage. However, it is still important to remove the user's ability to access data on other users to which they should not be privy, in case the app is further developed in a way that information on all users is no longer willingly released.</p></li>
 	<li>Proof of vulnerability:</li>
