@@ -1,3 +1,0 @@
-[submodule "landmarks_server"]
-	path = landmarks_server
-	url = git@heroku.com:dry-depths-90755.git
